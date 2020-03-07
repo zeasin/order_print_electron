@@ -1,14 +1,21 @@
 const { app, BrowserWindow,Menu } = require('electron')
+const path = require('path')
+const url = require('url')
+const ipc = require('electron').ipcMain
 
+// const ipc = ipcMain
+let newwin;
+let win;
 function createWindow () {   
   // 创建浏览器窗口
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+   win = new BrowserWindow({
+    // width: 800,
+    // height: 600,
     webPreferences: {
       nodeIntegration: true//在页面上集成 Nodejs
     }
   })
+  win.maximize()
 
   // 并且为你的应用加载index.html
   win.loadFile('index.html')
@@ -17,6 +24,18 @@ function createWindow () {
   win.webContents.openDevTools()
 
 }
+ipc.on('createWindow',()=> {
+    console.log('请求打开新窗口')
+    newwin = new BrowserWindow({
+        modal: true,
+        parent: win, //win是主窗口
+  
+    })
+    newwin.maximize()
+    newwin.loadURL(path.join('file:',__dirname,'new.html')); //new.html是新开窗口的渲染进程
+    newwin.on('closed',()=>{newwin = null})
+    
+})
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

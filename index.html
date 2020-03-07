@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>订单打印系统</title>
     <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
   </head>
@@ -13,8 +13,16 @@
     and Electron <script>document.write(process.versions.electron)</script>.
 
     <input type="button" id="new_window" value="查询" /> 
+
+    <script type="module">
+        const add = document.querySelector("#new_window")
+        const ipc = require('electron').ipcRenderer
+        add.onclick = ()=> {
+          ipc.send('createWindow');
+        }
+    </script>
     
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       const {BrowserWindow} = require('electron').remote
       const path = require('path')
   
@@ -30,6 +38,6 @@
         win.on('close', () => { win = null })
         win.loadURL(modalPath)
       })
-    </script>
+    </script> -->
   </body>
 </html>
