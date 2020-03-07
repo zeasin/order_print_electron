@@ -1,2 +1,4 @@
-# order_print_electron
-订单批量打印工具Electron
+# 订单批量打印工具Electron版本
+一个使用Electron开发的订单批量打印工具，借助菜鸟打印组件实现批量打印功能。主要功能有
++ 订单批量打印
++ 发货单批量打印
