@@ -29,9 +29,12 @@ ipc.on('createWindow',()=> {
     newwin = new BrowserWindow({
         modal: true,
         parent: win, //win是主窗口
-  
+        webPreferences: {
+          nodeIntegration: true//在页面上集成 Nodejs
+        }
     })
     newwin.maximize()
+    newwin.webContents.openDevTools()
     newwin.loadURL(path.join('file:',__dirname,'new.html')); //new.html是新开窗口的渲染进程
     newwin.on('closed',()=>{newwin = null})
     

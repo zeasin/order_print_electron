@@ -24,6 +24,15 @@
   <div class="flex-item">flex item 2</div>
   <div class="flex-item">flex item 3</div> 
 </div>
- 
+ <script>
+  const axios = require('axios');
+  axios.get('https://flash-api.xuangubao.cn/api/stock_label/labels?symbols=000063.SS')
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+ </script>
 </body>
 </html>
