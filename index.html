@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+  </head>
+  <body>
+    <h1>Hello WorldAAAAA!</h1>
+    We are using node <script>document.write(process.versions.node)</script>,
+    Chrome <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.
+
+    <input type="button" id="new_window" value="查询" /> 
+    
+    <script type="text/javascript">
+      const {BrowserWindow} = require('electron').remote
+      const path = require('path')
+  
+
+      const newWindowBtn = document.getElementById('new_window')
+
+      newWindowBtn.addEventListener('click', (event) => {
+        
+        const modalPath = path.join('file://', __dirname, 'modal.html')
+        console.log(modalPath)
+        let win = new BrowserWindow({ width: 400, height: 320 })
+
+        win.on('close', () => { win = null })
+        win.loadURL(modalPath)
+      })
+    </script>
+  </body>
+</html>
